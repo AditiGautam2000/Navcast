@@ -54,3 +54,50 @@ flowchart TD
     T --> U
     U --> V
 ```
+```mermaid
+flowchart TD
+
+    A[Mutual Fund Holdings Data] --> B[Company Name Normalization]
+
+    B --> C[Stock Symbol Mapping]
+
+    C --> D[Live Stock Market Data]
+
+    D --> E[Stock Movement Calculation]
+
+    E --> F[Feature Engineering]
+
+    F --> G[Weighted NAV Coefficient]
+
+    G --> H[Training Dataset Generation]
+
+    H --> I[Fund-Specific Linear Regression Models]
+
+    I --> J[Real-Time Prediction Engine]
+
+    J --> K[Predicted Mutual Fund Profit/Loss %]
+
+    K --> L[Investor Decision Support Before Market Close]
+
+
+
+    subgraph Performance Optimization
+        M[Multithreading]
+        N[Local Stock Data Cache]
+    end
+
+    M --> D
+    N --> D
+
+
+
+    subgraph Model Evaluation
+        O[Actual NAV Data from Groww]
+        P[Prediction vs Actual Comparison]
+        Q[MAE / MSE / R² / SMAPE]
+    end
+
+    K --> P
+    O --> P
+    P --> Q
+```

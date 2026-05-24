@@ -54,50 +54,31 @@ flowchart TD
     T --> U
     U --> V
 ```
+
 ```mermaid
-flowchart TD
+sequenceDiagram
 
-    A[Mutual Fund Holdings Data] --> B[Company Name Normalization]
+    participant Investor
+    participant NavCast
+    participant YahooFinanceAPI
+    participant MLModel
+    participant Groww
 
-    B --> C[Stock Symbol Mapping]
+    Investor->>NavCast: Select Mutual Fund
 
-    C --> D[Live Stock Market Data]
+    NavCast->>YahooFinanceAPI: Fetch Live Stock Prices
 
-    D --> E[Stock Movement Calculation]
+    YahooFinanceAPI-->>NavCast: Current Market Data
 
-    E --> F[Feature Engineering]
+    NavCast->>NavCast: Calculate NAV Coefficient
 
-    F --> G[Weighted NAV Coefficient]
+    NavCast->>MLModel: Send Feature Vector
 
-    G --> H[Training Dataset Generation]
+    MLModel-->>NavCast: Predicted Profit/Loss %
 
-    H --> I[Fund-Specific Linear Regression Models]
+    NavCast-->>Investor: Estimated NAV Before 3 PM
 
-    I --> J[Real-Time Prediction Engine]
+    Groww-->>NavCast: Actual NAV Movement
 
-    J --> K[Predicted Mutual Fund Profit/Loss %]
-
-    K --> L[Investor Decision Support Before Market Close]
-
-
-
-    subgraph Performance Optimization
-        M[Multithreading]
-        N[Local Stock Data Cache]
-    end
-
-    M --> D
-    N --> D
-
-
-
-    subgraph Model Evaluation
-        O[Actual NAV Data from Groww]
-        P[Prediction vs Actual Comparison]
-        Q[MAE / MSE / R² / SMAPE]
-    end
-
-    K --> P
-    O --> P
-    P --> Q
+    NavCast->>NavCast: Evaluate Prediction Accuracy
 ```
